@@ -7,7 +7,7 @@
       <dimension table="shops" name="Shops" field="name" fact_fk="shop_id"/>
       <dimension table="dates" name="Dates" field="date" fact_fk="date_id"/>
       <dimension table="kinds" name="Kinds" field="kind" fact_fk="kind_id"/>
-      <dimension table="customers" name="Customers" field="name" fact_fk="name_id"/>
+      <dimension table="customers" name="Customers" field="name" fact_fk="customer_id"/>
     </dimensions>
   </storage>
 </storages>

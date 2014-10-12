@@ -1,4 +1,5 @@
 from xml.dom.minidom import parse
+import sqlite3
 
 def fail(message):
   print message
@@ -19,11 +20,12 @@ class Dimension:
 
 class Storage:
   def __init__(self, element):
-    self.pathValue = checkElementAttribute(element, "path")
+    self.path = checkElementAttribute(element, "path")
     self.aggregatedValueName = checkElementAttribute(element, "aggregated_value_name")
     self.factTable = checkElementAttribute(element, "fact_table")
     self.aggregatedValueField = checkElementAttribute(element, "aggregated_value_field")
-    self.dimension = []
+    self.dimensions = {}
+    self.joins = ""
 
     dimensionsHolder = element.getElementsByTagName("dimensions")
     if len(dimensionsHolder) > 1:
@@ -34,7 +36,21 @@ class Storage:
     dimensionsElements = dimensionsHolder[0].getElementsByTagName("dimension")
     for element in dimensionsElements:
       dimension = Dimension(element)
-      self.dimension.append(dimension)
+      self.joins += " join " + dimension.table + " on " + dimension.factFk + "=" + dimension.table + ".id"
+      self.dimensions[dimension.name] = dimension
+
+  def getTable(self, dimensions):
+    connection = sqlite3.connect(self.path)
+    query = "select "
+    for dimensionName in dimensions:
+      dimension = self.dimensions[dimensionName]
+      query += dimension.table + "." + dimension.field + ", "
+    query += "sum(" + self.aggregatedValueField + ") "
+    query += " from " + self.factTable
+    query += self.joins
+    cursor = connection.execute(query)
+    for row in cursor:
+      print row[0], row[1], row[2]
 
 def main():
   dom = parse("./config.xml")
@@ -45,7 +61,7 @@ def main():
   storageElements = rootElement.getElementsByTagName("storage")
   for element in storageElements:
     storage = Storage(element)
-
+    storage.getTable(["Shops", "Kinds"])
 
 if __name__ == "__main__":
   main()
