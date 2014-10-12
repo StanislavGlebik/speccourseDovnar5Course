@@ -18,6 +18,20 @@ class Dimension:
     self.field = checkElementAttribute(element, "field")
     self.factFk = checkElementAttribute(element, "fact_fk")
 
+class EqualityFilter:
+# for equality
+  def __init__(self, values, dimension):
+    self.values = values
+    self.dimensionTable = dimension.table
+    self.dimensionField = dimension.field
+
+  def generateQueryString(self):
+    res = " and (1=2"
+    for value in self.values:
+      res += " or " + self.dimensionTable + "." + self.dimensionField + "=" + '"' + value + '"'
+    res += ")"
+    return res
+
 class Storage:
   def __init__(self, element):
     self.path = checkElementAttribute(element, "path")
@@ -39,7 +53,10 @@ class Storage:
       self.joins += " join " + dimension.table + " on " + dimension.factFk + "=" + dimension.table + ".id"
       self.dimensions[dimension.name] = dimension
 
-  def getTable(self, dimensions):
+  def getDimensionByName(self, dimensionName):
+    return self.dimensions[dimensionName]
+
+  def getTable(self, dimensions, filters = []):
     connection = sqlite3.connect(self.path)
     query = "select "
     for dimensionName in dimensions:
@@ -48,6 +65,18 @@ class Storage:
     query += "sum(" + self.aggregatedValueField + ") "
     query += " from " + self.factTable
     query += self.joins
+
+    query += " where 1=1 "
+    for f in filters:
+      query += f.generateQueryString()
+
+    query += " group by "
+    for dimensionName in dimensions:
+      dimension = self.dimensions[dimensionName]
+      query += dimension.table + "." + dimension.field + ", "
+    query = query[:-2]
+
+    print query
     cursor = connection.execute(query)
     for row in cursor:
       print row[0], row[1], row[2]
@@ -61,7 +90,8 @@ def main():
   storageElements = rootElement.getElementsByTagName("storage")
   for element in storageElements:
     storage = Storage(element)
-    storage.getTable(["Shops", "Kinds"])
+    storage.getTable(["Shops", "Kinds"], [EqualityFilter(["stash", "kolesov93"], storage.getDimensionByName("Customers")),])
 
 if __name__ == "__main__":
   main()
+

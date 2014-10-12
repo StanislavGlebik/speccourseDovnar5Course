@@ -25,6 +25,7 @@ insert into customers values(1, "stash");
 insert into customers values(2, "kolesov93");
 
 insert into main values(1, 1, 1, 1, 1, 10);
+insert into main values(10, 1, 2, 1, 1, 10);
 insert into main values(2, 2, 2, 2, 2, 20);
 
 insert into main values(3, 1, 1, 2, 2, 30);
