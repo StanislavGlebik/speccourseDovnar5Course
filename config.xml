@@ -2,7 +2,8 @@
   <storage aggregated_value_name="Apples amount"
            fact_table="main"
            aggregated_value_field="applesAmount"
-           path="./new">
+           path="./new"
+           id = "0">
     <dimensions>
       <dimension table="shops" name="Shops" field="name" fact_fk="shop_id"/>
       <dimension table="dates" name="Dates" field="date" fact_fk="date_id"/>
