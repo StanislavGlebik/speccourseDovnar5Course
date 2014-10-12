@@ -187,6 +187,7 @@ def main():
     storage = Storage(element)
     storages[storage.getId()] = storage
     storage.getTable(["Shops", "Kinds"], [EqualityFilter(["stash", "kolesov93"], storage.getDimensionByName("Customers")),])
+    storage.getTable(["Customers", "Kinds"], [])
 
   domReport = parse("./reports/report2.xml")
   report = Report(domReport.documentElement, storages)
