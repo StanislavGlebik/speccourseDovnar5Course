@@ -39,7 +39,19 @@ class EqualityFilter:
     return res
 
 class Report:
-  def __init__(self, element, storages):
+  def setStorage(self, storage):
+    self.storage = storage
+
+  def setFilters(self, filters):
+    self.filters = filters
+
+  def setHorizontalDimension(self, horizontalDimension):
+    self.horizontalDimension = horizontalDimension
+
+  def setVerticalDimension(self, verticalDimension):
+    self.verticalDimension = verticalDimension
+
+  def initFromXmlElement(self, element, storages):
     self.storageId = checkElementAttribute(element, "storage_id")
     self.filters = []
     self.storage = storages[self.storageId]
@@ -186,17 +198,22 @@ def main():
   for element in storageElements:
     storage = Storage(element)
     storages[storage.getId()] = storage
-    storage.getTable(["Shops", "Kinds"], [EqualityFilter(["stash", "kolesov93"], storage.getDimensionByName("Customers")),])
-    storage.getTable(["Customers", "Kinds"], [])
+    report = Report()
+    report.setStorage(storage)
+    report.setHorizontalDimension(storage.getDimensionByName("Shops"))
+    report.setVerticalDimension(storage.getDimensionByName("Kinds"))
+    report.setFilters([EqualityFilter(["stash", "kolesov93"], storage.getDimensionByName("Customers")),])
+    report.executeQuery()
 
   domReport = parse("./reports/report2.xml")
-  report = Report(domReport.documentElement, storages)
-
+  report = Report()
+  report.initFromXmlElement(domReport.documentElement, storages)
   report.executeQuery()
   report.saveToFile("try.xml")
 
   domReport = parse("try.xml")
-  report = Report(domReport.documentElement, storages)
+  report = Report()
+  report.initFromXmlElement(domReport.documentElement, storages)
   report.executeQuery()
 
 if __name__ == "__main__":
