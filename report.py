@@ -2,12 +2,15 @@ from common import checkElementAttribute
 from common import fail
 
 from filters import EqualityFilter
+from filters import InequalityFilter
 
 from xml.dom.minidom import getDOMImplementation
+from xml.dom.minidom import parse
 
 class Report:
   def setStorage(self, storage):
     self.storage = storage
+    self.storageId = storage.id
 
   def setFilters(self, filters):
     self.filters = filters
@@ -17,6 +20,10 @@ class Report:
 
   def setVerticalDimension(self, verticalDimension):
     self.verticalDimension = verticalDimension
+
+  def initFromFile(self, filename, storages):
+    document = parse(filename)
+    self.initFromXmlElement(document.documentElement, storages)
 
   def initFromXmlElement(self, element, storages):
     self.storageId = checkElementAttribute(element, "storage_id")
@@ -51,7 +58,12 @@ class Report:
           equals.append(checkElementAttribute(e, "value"))
         self.filters.append(EqualityFilter(equals, curDimension))
       elif filterType == "inequality":
-        fail("Not implemented")
+        values = {}
+        if fElement.hasAttribute("from"):
+          values["from"] = fElement.getAttribute("from")
+        if fElement.hasAttribute("to"):
+          values["to"] = fElement.getAttribute("to")
+        self.filters.append(InequalityFilter(curDimension, values))
       else:
         fail("Bad filter type")
 
@@ -77,7 +89,7 @@ class Report:
         filtersElement.appendChild(f.getElement(document))
 
       root.appendChild(filtersElement)
-      document.writexml(output)
+      document.writexml(output, addindent="\t", newl = "\n")
 
   def getFilters(self):
     return self.filters
