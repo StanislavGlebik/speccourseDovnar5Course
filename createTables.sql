@@ -35,8 +35,8 @@ insert into main values(3, 2, 1, 2, 2, 20); -- kolesov93_shop ranetki 2014-02-28
 insert into main values(4, 3, 1, 2, 2, 20); -- Wallmart ranetki 2014-02-28 kolesov93
 
 insert into main values(5, 1, 1, 2, 2, 30); -- stash93_shop ranetki 2014-02-28 kolesov93
-insert into main values(6, 1, 1, 1, 1, 30); -- stash93_shop ranetki 2014-05-05 stash93
-insert into main values(7, 1, 2, 1, 1, 10); -- stash93_shop nalivnoeRumyanoe 2014-05-05 stash93
+insert into main values(6, 1, 1, 1, 1, 30); -- stash93_shop ranetki 2014-05-05 stash
+insert into main values(7, 1, 2, 1, 1, 10); -- stash93_shop nalivnoeRumyanoe 2014-05-05 stash
 
 insert into main values(8, 1, 1, 1, 3, 10); -- stash93_shop ranetki 2014-05-05 Quentin Tarantino
 
