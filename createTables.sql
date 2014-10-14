@@ -1,3 +1,4 @@
+
 PRAGMA foreign_keys = ON;
 
 create table if not exists shops(id int primary key, name TEXT);
@@ -22,6 +23,46 @@ insert into dates values(2, "2014-02-28");
 
 insert into kinds values(1, "ranetki");
 insert into kinds values(2, "nalivnoeRumyanoe");
+insert into kinds values(3, "avangard");
+insert into kinds values(4, "avgusta");
+insert into kinds values(41, "alpek");
+insert into kinds values(5, "alpek");
+insert into kinds values(6, "babyshkino");
+insert into kinds values(7, "borovinko");
+insert into kinds values(8, "vagner");
+insert into kinds values(9, "vita");
+insert into kinds values(10, "vishnevaya");
+insert into kinds values(11, "gornist"); 
+insert into kinds values(12, "dachnaya");
+insert into kinds values(14, "dolgo");
+insert into kinds values(15, "dybrovinko");
+insert into kinds values(16, "zivinka");
+insert into kinds values(17, "zarevo");
+insert into kinds values(18, "zdorovie");
+insert into kinds values(19, "imrys");
+insert into kinds values(20, "kvintin");
+insert into kinds values(21, "kortland");
+insert into kinds values(22, "lobo");
+insert into kinds values(23, "lych");
+insert into kinds values(212, "malinka");
+insert into kinds values(24, "malinka");
+insert into kinds values(25, "mariya");
+insert into kinds values(26, "nimfa");
+insert into kinds values(27, "orlik");
+insert into kinds values(28, "palitra");
+insert into kinds values(29, "pavlysha");
+insert into kinds values(30, "prima");
+insert into kinds values(31, "rossa");
+insert into kinds values(32, "ryblevoe");
+insert into kinds values(33, "svetloe");
+insert into kinds values(34, "skala");
+insert into kinds values(35, "start");
+insert into kinds values(36, "spartak");
+insert into kinds values(37, "titovka");
+insert into kinds values(38, "ytes");
+insert into kinds values(39, "chara");
+insert into kinds values(40, "yantar");
+
 
 insert into customers values(1, "stash");
 insert into customers values(2, "kolesov93");
