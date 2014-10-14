@@ -1,0 +1,10 @@
+<report storage_id="0">
+  <vertical dimension="Shops" />
+  <horizontal dimension="Kinds" />
+  <filters>
+    <filter type="inequality" dimension="Customers" from="stash" to="stash"/>
+    <filter type="equality" dimension="Kinds">
+      <equal value="ranetki" />
+    </filter>
+  </filters>
+</report>
