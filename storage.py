@@ -35,6 +35,15 @@ class Storage:
   def getId(self):
     return self.id
 
+  def getDimensionValues(self, dimensionName):
+    dimension = self.dimensions[dimensionName]
+    query = "select "
+    query += dimension.table + "." + dimension.field + " "
+    query += "from " + dimension.table
+    connection = sqlite3.connect(self.path)
+    res = connection.execute(query)
+    return map(lambda x: x[0], res)
+
   def getNamesForOneDimension(self, dimension, filters):
     query = "select "
     query += dimension.table + "." + dimension.field + " "
