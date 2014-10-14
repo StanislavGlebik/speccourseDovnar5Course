@@ -1,6 +1,4 @@
-
 PRAGMA foreign_keys = ON;
-
 create table if not exists shops(id int primary key, name TEXT);
 create table if not exists dates(id int primary key, date TEXT);
 create table if not exists kinds(id int primary key, kind TEXT);
@@ -25,7 +23,6 @@ insert into kinds values(1, "ranetki");
 insert into kinds values(2, "nalivnoeRumyanoe");
 insert into kinds values(3, "avangard");
 insert into kinds values(4, "avgusta");
-insert into kinds values(41, "alpek");
 insert into kinds values(5, "alpek");
 insert into kinds values(6, "babyshkino");
 insert into kinds values(7, "borovinko");
@@ -44,7 +41,7 @@ insert into kinds values(20, "kvintin");
 insert into kinds values(21, "kortland");
 insert into kinds values(22, "lobo");
 insert into kinds values(23, "lych");
-insert into kinds values(212, "malinka");
+insert into kinds values(221, "malinka");
 insert into kinds values(24, "malinka");
 insert into kinds values(25, "mariya");
 insert into kinds values(26, "nimfa");
@@ -68,6 +65,22 @@ insert into customers values(1, "stash");
 insert into customers values(2, "kolesov93");
 insert into customers values(3, "Quentin Tarantino");
 insert into customers values(4, "Robert Rodrigezzz");
+insert into customers values(5, "ann");
+insert into customers values(6, "nastya");
+insert into customers values(7, "sveta");
+insert into customers values(8, "pasha");
+insert into customers values(9, "tolya");
+insert into customers values(10, "alina");
+insert into customers values(11, "igor");
+insert into customers values(12, "toma");
+insert into customers values(13, "valentina");
+insert into customers values(14, "begemot");
+insert into customers values(15, "natasha");
+insert into customers values(16, "zhanna");
+insert into customers values(17, "nikita");
+insert into customers values(18, "vladimir");
+insert into customers values(19, "vitek");
+insert into customers values(20, "anton");
 
 insert into main values(1, 1, 1, 1, 1, 10); -- stash93_shop ranetki 2014-05-05 stash
 
